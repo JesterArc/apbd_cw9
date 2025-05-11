@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddScoped<IDbService, DbService>();
+builder.Services.AddScoped<IWarehouseService, WarehouseService>();
 
 var app = builder.Build();
 
