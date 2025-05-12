@@ -14,11 +14,11 @@ public class WarehouseService : IWarehouseService
         
         var command = "SELECT COUNT(1) FROM Product WHERE IdProduct = @idProduct";
         
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        using (SqlCommand cmd = new SqlCommand(command, conn))
+        await using (SqlConnection conn = new SqlConnection(_connectionString))
+        await using (SqlCommand cmd = new SqlCommand(command, conn))
         {
             cmd.Parameters.AddWithValue("@idProduct", idProduct);
-            conn.Open();
+            await conn.OpenAsync();
             using (var reader = await cmd.ExecuteReaderAsync())
             {
                 while (await reader.ReadAsync())
@@ -36,12 +36,12 @@ public class WarehouseService : IWarehouseService
         
         var command = "SELECT COUNT(1) FROM [Order] WHERE IdProduct = @idProduct and Amount = @amount";
         
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        using (SqlCommand cmd = new SqlCommand(command, conn))
+        await using (SqlConnection conn = new SqlConnection(_connectionString))
+        await using (SqlCommand cmd = new SqlCommand(command, conn))
         {
             cmd.Parameters.AddWithValue("@idProduct", idProduct);
             cmd.Parameters.AddWithValue("@amount", amount);
-            conn.Open();
+            await conn.OpenAsync();
             using (var reader = await cmd.ExecuteReaderAsync())
             {
                 while (await reader.ReadAsync())
@@ -59,11 +59,11 @@ public class WarehouseService : IWarehouseService
         
         var command = "SELECT COUNT(1) FROM Product_Warehouse WHERE IdOrder = @idOrder";
         
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        using (SqlCommand cmd = new SqlCommand(command, conn))
+        await using (SqlConnection conn = new SqlConnection(_connectionString))
+        await using (SqlCommand cmd = new SqlCommand(command, conn))
         {
             cmd.Parameters.AddWithValue("@idOrder", idOrder);
-            conn.Open();
+            await conn.OpenAsync();
             using (var reader = await cmd.ExecuteReaderAsync())
             {
                 while (await reader.ReadAsync())
