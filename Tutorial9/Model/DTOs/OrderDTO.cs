@@ -2,6 +2,7 @@
 
 public class OrderDTO
 {
+    public int IdOrder { get; set; }
     public required int IdProduct { get; set; }
     public required int IdWarehouse { get; set; }
     public required int Amount { get; set; }
